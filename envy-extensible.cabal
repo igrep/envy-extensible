@@ -1,7 +1,7 @@
 cabal-version:       2.2
 name:                envy-extensible
 version:             0.1.0.0
--- synopsis:
+synopsis:            Provides FromEnv in envy instance for Record of extensible.
 -- description:
 homepage:            https://github.com/igrep/envy-extensible#readme
 license:             BSD-3-Clause
