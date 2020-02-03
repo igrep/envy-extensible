@@ -5,6 +5,20 @@
 
 packages:
 - completed:
+    cabal-file:
+      size: 1705
+      sha256: ff786eb11e3fe8494b33188ee9a93ea312c9eedc0e256d54c5780dd35be84812
+    name: envy
+    version: 2.0.0.0
+    git: https://github.com/igrep/envy.git
+    pantry-tree:
+      size: 614
+      sha256: f2b9cb2daa3b1e07c398edb2926f2a6b7245b3bf497be4d3fb846edc5d7ecf3f
+    commit: 405e6f6abd753b4eedd28d51efd3d2c4ccc2aa94
+  original:
+    git: https://github.com/igrep/envy.git
+    commit: 405e6f6abd753b4eedd28d51efd3d2c4ccc2aa94
+- completed:
     hackage: extensible-0.7@sha256:12dfa21548aba9f3b02a2f708a935240bae43383945f41e4e9054f37e421035b,2859
     pantry-tree:
       size: 2149
@@ -20,7 +34,7 @@ packages:
     hackage: membership-0@sha256:3a11d8fd53cb1a76bb9273e6c929bbf9d649f109714bf487abb3143be04ddc81,995
 snapshots:
 - completed:
-    size: 524162
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/21.yaml
-    sha256: 9a55dd75853718f2bbbe951872b36a3b7802fcd71796e0f25b8664f24e34c666
-  original: lts-14.21
+    size: 471953
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2020/2/3.yaml
+    sha256: 8da4ca77844dfe7f7386a6e3e9417c7a05b395dd4310a816a379ad6dab908dc7
+  original: nightly-2020-02-03

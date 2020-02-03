@@ -30,15 +30,14 @@ module Data.Extensible.Envy
   ) where
 
 
-import           Control.Applicative   ((<|>))
-import qualified Data.Char             as C
-import           Data.Extensible       (Forall, Instance1)
-import qualified Data.Extensible       as Ex
-import           Data.Functor.Identity (Identity (Identity), runIdentity)
-import           Data.Kind             (Type)
-import           Data.Proxy            (Proxy (Proxy))
-import           GHC.TypeLits          (KnownSymbol, Symbol)
-import qualified System.Envy           as Env
+import           Control.Applicative ((<|>))
+import qualified Data.Char           as C
+import           Data.Extensible     (Forall, Instance1)
+import qualified Data.Extensible     as Ex
+import           Data.Kind           (Type)
+import           Data.Proxy          (Proxy (Proxy))
+import           GHC.TypeLits        (KnownSymbol, Symbol)
+import qualified System.Envy         as Env
 
 
 -- | Function to convert field labels of 'Ex.Record' into the
@@ -117,13 +116,3 @@ recordFromEnvWithDefault def fl2en =
     ( Ex.Field <$> Env.env (fl2en $ Ex.stringKeyOf membership)
     ) <|> pure (Ex.hlookup membership def)
 {-# INLINE recordFromEnvWithDefault #-}
-
-
--- | Necessary to make a 'Env.Parser' for 'Ex.Record'.
---
--- TODO: Remove this after <https://github.com/dmjio/envy/pull/31> is released.
-instance Env.Var a => Env.Var (Identity a) where
-  toVar = Env.toVar . runIdentity
-  {-# INLINE toVar #-}
-  fromVar = fmap Identity . Env.fromVar
-  {-# INLINE fromVar #-}
