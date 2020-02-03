@@ -16,11 +16,13 @@
 -- Maintainer: YAMAMOTO Yuji <yuji-yamamoto@iij.ad.jp>
 -- Stability : Experimental
 --
--- Provides 'Env.FromEnv' instance for 'Ex.Record' and functions to
--- create 'Ex.Record' from environment variable using 'Env.Parser'.
+-- Provides functions to create 'Ex.Record' from environment variable
+-- using 'Env.Parser'.
 --------------------------------------------------------------------------------
+
 module Data.Extensible.Envy
   ( recordFromEnvWith
+  , recordFromEnvWithDefault
   , recordFromEnv
   , FieldLabelToEnvName
   , defaultFieldLabelToEnvName
@@ -28,6 +30,7 @@ module Data.Extensible.Envy
   ) where
 
 
+import           Control.Applicative   ((<|>))
 import qualified Data.Char             as C
 import           Data.Extensible       (Forall, Instance1)
 import qualified Data.Extensible       as Ex
@@ -97,16 +100,28 @@ recordFromEnvWith fl2en =
 {-# INLINE recordFromEnvWith #-}
 
 
--- | Returns 'recordFromEnv' when the first argument of 'Env.fromEnv' is @Nothing@.
-instance Forall (Ex.KeyTargetAre KnownSymbol (Instance1 Env.Var h)) xs
-  => Env.FromEnv (Ex.RecordOf (h :: Type -> Type) xs)
+-- | 'Env.Parser' for 'Ex.Record'.
+-- This is necessary to implement the instance of 'Env.FromEnv' for
+-- 'Ex.Record' correctly.
+recordFromEnvWithDefault
+  :: forall (xs :: [Ex.Assoc Symbol Type]) h
+   . Forall (Ex.KeyTargetAre KnownSymbol (Instance1 Env.Var h)) xs
+  => Ex.RecordOf h xs
+  -> FieldLabelToEnvName
+  -> Env.Parser (Ex.RecordOf h xs)
+recordFromEnvWithDefault def fl2en =
+  Ex.hgenerateFor
+    (Proxy :: Proxy (Ex.KeyTargetAre KnownSymbol (Instance1 Env.Var h))) f
  where
-  fromEnv (Just r) = pure r
-  fromEnv Nothing  = recordFromEnv
-  {-# INLINE fromEnv #-}
+  f membership =
+    ( Ex.Field <$> Env.env (fl2en $ Ex.stringKeyOf membership)
+    ) <|> pure (Ex.hlookup membership def)
+{-# INLINE recordFromEnvWithDefault #-}
 
 
--- | Necessary to make 'Ex.Record' an instance of 'Env.FromEnv'
+-- | Necessary to make a 'Env.Parser' for 'Ex.Record'.
+--
+-- TODO: Remove this after <https://github.com/dmjio/envy/pull/31> is released.
 instance Env.Var a => Env.Var (Identity a) where
   toVar = Env.toVar . runIdentity
   {-# INLINE toVar #-}

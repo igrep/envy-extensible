@@ -1,6 +1,6 @@
 cabal-version:       2.2
 name:                envy-extensible
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            Provides FromEnv in envy instance for Record of extensible.
 -- description:
 homepage:            https://github.com/igrep/envy-extensible#readme
@@ -23,6 +23,7 @@ library
   import:              shared
   hs-source-dirs:      src
   exposed-modules:     Data.Extensible.Envy
+                       Data.Extensible.Envy.Instances
 
 test-suite envy-extensible-test
   import:              shared
