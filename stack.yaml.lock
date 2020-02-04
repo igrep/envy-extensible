@@ -5,19 +5,12 @@
 
 packages:
 - completed:
-    cabal-file:
-      size: 1705
-      sha256: ff786eb11e3fe8494b33188ee9a93ea312c9eedc0e256d54c5780dd35be84812
-    name: envy
-    version: 2.0.0.0
-    git: https://github.com/igrep/envy.git
+    hackage: envy-2.1.0.0@sha256:0ffdc2e84ddd7414b9bfe17939f83a374f32935502db6d4a73b27cf92343d35c,1705
     pantry-tree:
-      size: 614
-      sha256: f2b9cb2daa3b1e07c398edb2926f2a6b7245b3bf497be4d3fb846edc5d7ecf3f
-    commit: 405e6f6abd753b4eedd28d51efd3d2c4ccc2aa94
+      size: 368
+      sha256: 988a7937cff064ea6d523d64f7812861722b0fa3b085b82e18b7e59d404ff1c8
   original:
-    git: https://github.com/igrep/envy.git
-    commit: 405e6f6abd753b4eedd28d51efd3d2c4ccc2aa94
+    hackage: envy-2.1.0.0@sha256:0ffdc2e84ddd7414b9bfe17939f83a374f32935502db6d4a73b27cf92343d35c,1705
 - completed:
     hackage: extensible-0.7@sha256:12dfa21548aba9f3b02a2f708a935240bae43383945f41e4e9054f37e421035b,2859
     pantry-tree:
